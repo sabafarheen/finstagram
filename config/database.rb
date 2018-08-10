@@ -11,15 +11,15 @@ configure do
     filename = File.basename(model_file).gsub('.rb', '')
     autoload ActiveSupport::Inflector.camelize(filename), model_file
   end
+end
 
 
 
 if Sinatra::Application.development?
     set :database, {
       adapter: "sqlite3",
-      database: "db/db.sqlite3"
-    }
-  else
+      database: "db/db.sqlite3"}
+else
     db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
     set :database, {
       adapter: "postgresql",
@@ -30,4 +30,3 @@ if Sinatra::Application.development?
       encoding: 'utf8'
     }
   end
-end
